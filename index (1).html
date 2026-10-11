@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Treinamentos SST - NRs e certificados</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🦺%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EDF0F3;--surface:#FFFFFF;--ink:#0F1E2B;--muted:#566776;--line:#D3DAE1;--chip:#E3E8ED;
+  --yellow:#F5B800;--blue:#1F5FA8;--red:#C4352B;
+  --ok-bg:#DCF2E6;--ok-fg:#0E5A38;--warn-bg:#FFEFB8;--warn-fg:#654500;--bad-bg:#FADAD6;--bad-fg:#8A1F17;
+  --f-head:'Barlow Condensed','Arial Narrow',Arial,sans-serif;
+  --f-body:'Barlow',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0C151D;--surface:#15222D;--ink:#E8EEF3;--muted:#93A4B3;--line:#283A4B;--chip:#1E2F3E;
+    --ok-bg:#12382A;--ok-fg:#8EE0B5;--warn-bg:#3F3208;--warn-fg:#F5D77A;--bad-bg:#431A17;--bad-fg:#F3A39B;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0C151D;--surface:#15222D;--ink:#E8EEF3;--muted:#93A4B3;--line:#283A4B;--chip:#1E2F3E;
+  --ok-bg:#12382A;--ok-fg:#8EE0B5;--warn-bg:#3F3208;--warn-fg:#F5D77A;--bad-bg:#431A17;--bad-fg:#F3A39B;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.45 var(--f-body);-webkit-text-size-adjust:100%}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+
+.stripe{height:10px;background:repeating-linear-gradient(135deg,var(--yellow) 0 14px,#111 14px 28px)}
+.top{background:var(--surface);border-bottom:1px solid var(--line)}
+.top-in{max-width:760px;margin:0 auto;padding:12px 16px}
+.brand{font:700 26px/1 var(--f-head);letter-spacing:.2px}
+.brand small{display:block;font:500 14px/1.3 var(--f-body);color:var(--muted);margin-top:3px}
+main{max-width:760px;margin:0 auto;padding:16px 16px 110px}
+h1{font:700 30px/1.05 var(--f-head);margin:6px 0 4px}
+h2{font:700 21px/1.1 var(--f-head);margin:24px 0 10px}
+.sub{color:var(--muted);margin:0 0 14px}
+.meta{color:var(--muted);font-size:14px;margin:2px 0 0}
+.note{font-size:14px;color:var(--muted);margin:10px 0}
+.empty{background:var(--surface);border:1px dashed var(--line);border-radius:10px;padding:16px;color:var(--muted)}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:10px}
+.row{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.btn{min-height:44px;padding:0 16px;border:0;border-radius:8px;background:var(--yellow);color:#111;font-weight:600;cursor:pointer}
+.btn.ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
+.btn.danger{background:transparent;border:1.5px solid var(--red);color:var(--red)}
+.btn.big{width:100%;margin-top:14px;min-height:50px;font-size:17px}
+.link{background:none;border:0;padding:0;color:var(--blue);text-decoration:underline;cursor:pointer}
+.back{background:none;border:0;color:var(--blue);padding:8px 0;min-height:44px;cursor:pointer;font-weight:500}
+
+.inp,select{width:100%;min-height:44px;padding:8px 12px;border:1.5px solid var(--line);border-radius:8px;background:var(--surface);margin-top:4px}
+label{display:block;font-size:14px;font-weight:500;margin-bottom:10px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:420px){.two{grid-template-columns:1fr}}
+
+.item{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;cursor:pointer;min-height:64px}
+.item b{display:block;font-weight:600;line-height:1.25}
+.sign{flex:none;width:52px;height:52px;background:var(--yellow);color:#111;border:2.5px solid #111;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--f-head);line-height:.9}
+.sign small{font-size:12px;font-weight:600;letter-spacing:.5px}
+.sign b{font-size:25px;font-weight:700;display:block}
+.sign.off{background:var(--chip);color:var(--muted);border-color:var(--muted)}
+.head{display:flex;gap:14px;align-items:center;margin-bottom:6px}
+.head .sign{width:62px;height:62px}
+.head .sub{margin:0}
+
+.aula{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-bottom:8px}
+.aula summary{list-style:none;cursor:pointer;padding:12px;display:flex;gap:10px;align-items:flex-start;font-weight:500;min-height:44px}
+.aula summary::-webkit-details-marker{display:none}
+.aula p{margin:0;padding:0 12px 12px 46px;color:var(--muted)}
+.idx{flex:none;width:24px;height:24px;border-radius:50%;background:var(--chip);font-size:13px;display:flex;align-items:center;justify-content:center;font-weight:600}
+
+.chk{display:flex;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;min-height:52px}
+.chk input{width:22px;height:22px;flex:none}
+.chk span{display:block}
+.chk small{display:block;color:var(--muted)}
+
+.st{flex:none;font-size:13px;font-weight:600;padding:3px 9px;border-radius:99px;background:var(--chip);color:var(--muted);white-space:nowrap}
+.st.ok{background:var(--ok-bg);color:var(--ok-fg)}
+.st.warn{background:var(--warn-bg);color:var(--warn-fg)}
+.st.bad{background:var(--bad-bg);color:var(--bad-fg)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 12px}
+.chip{min-height:40px;padding:0 14px;border-radius:99px;border:1.5px solid var(--line);background:var(--surface);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.logo-prev{max-height:60px;max-width:180px;display:block;margin:6px 0;background:#fff;border:1px solid var(--line);padding:4px;border-radius:6px}
+
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);z-index:20}
+.tabs{max-width:760px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
+.tab{min-height:56px;border:0;border-top:3px solid transparent;background:none;font-size:13px;color:var(--muted);cursor:pointer;padding:0 2px}
+.tab[aria-current="page"]{border-top-color:var(--yellow);color:var(--ink);font-weight:600}
+
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:40;display:flex;align-items:flex-end;justify-content:center}
+.modal-card{background:var(--surface);width:100%;max-width:520px;max-height:90%;overflow:auto;border-radius:14px 14px 0 0;padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px))}
+.modal-card h2{margin-top:0}
+@media (min-width:600px){#modal{align-items:center}.modal-card{border-radius:14px}}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(76px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;z-index:60;max-width:90%;text-align:center;font-size:15px}
+
+#cert-overlay{position:fixed;inset:0;z-index:50;background:var(--bg);overflow:auto;padding:env(safe-area-inset-top,0px) 12px 24px}
+.cert-bar{position:sticky;top:0;z-index:2;display:flex;gap:8px;padding:10px 0;background:var(--bg)}
+#cert-box{margin:0 auto}
+#cert-scale{width:297mm;transform-origin:top left}
+
+/* Certificado */
+.cert-page{position:relative;width:297mm;height:210mm;background:#fff;color:#0F1E2B;overflow:hidden;box-shadow:0 2px 14px rgba(0,0,0,.3);margin:0 0 18px;font-family:var(--f-body)}
+.c-band{position:absolute;left:0;right:0;top:0;height:7mm;background:repeating-linear-gradient(135deg,#F5B800 0 5mm,#111 5mm 10mm)}
+.c-in{position:absolute;left:10mm;right:10mm;top:15mm;bottom:10mm;border:.6mm solid #0F1E2B;padding:7mm 14mm 6mm;display:flex;flex-direction:column}
+.c-head{display:flex;align-items:center;gap:5mm;min-height:14mm}
+.c-logo{max-height:14mm;max-width:40mm;object-fit:contain}
+.c-head b{display:block;font-size:13pt}
+.c-head span{font-size:9pt;color:#4a5a68}
+.c-title{font:700 38pt/1 var(--f-head);margin:3mm 0 0;text-align:center}
+.c-sub{text-align:center;font-size:12pt;color:#3a4a58;margin:1mm 0 5mm}
+.c-txt{text-align:center;font-size:13pt;margin:0 0 2mm;line-height:1.5}
+.c-name{text-align:center;font:600 30pt/1.1 var(--f-head);margin:0 0 2mm;border-bottom:.3mm solid #0F1E2B;padding:0 8mm 1mm;align-self:center;min-width:60%}
+.c-val{text-align:center;font-size:11pt;color:#3a4a58;margin:2mm 0 0}
+.c-sign{display:grid;grid-template-columns:1fr 1fr;gap:20mm;margin-top:auto;padding:0 8mm}
+.c-sign div{border-top:.3mm solid #0F1E2B;padding-top:1.5mm;text-align:center;font-size:10pt;line-height:1.3}
+.c-sign b{display:block;font-size:11pt}
+.c-foot{display:flex;justify-content:space-between;font-size:9pt;color:#4a5a68;margin-top:5mm}
+.c-vt{font:700 26pt/1 var(--f-head);margin:2mm 0 1mm}
+.c-list{columns:2;column-gap:12mm;margin:4mm 0 0;padding-left:6mm;font-size:11pt;line-height:1.45}
+.c-list li{break-inside:avoid;margin-bottom:1.5mm}
+.c-meta{margin-top:auto;font-size:10pt;line-height:1.5;border-top:.3mm solid #0F1E2B;padding-top:3mm}
+
+@page{size:A4 landscape;margin:0}
+@media print{
+  html,body{background:#fff!important;overflow:visible!important;height:auto!important}
+  :root{padding:0!important}
+  #app,nav,#modal,#toast,.no-print,.stripe{display:none!important}
+  #cert-overlay{position:static!important;overflow:visible!important;padding:0!important;background:#fff!important;inset:auto!important}
+  #cert-box{width:auto!important;height:auto!important;margin:0!important}
+  #cert-scale{transform:none!important}
+  .cert-page{box-shadow:none;margin:0;break-after:page;page-break-after:always}
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="stripe"></div>
+  <header class="top"><div class="top-in"><div class="brand">Treinamentos SST<small>NRs, aulas e certificados</small></div></div></header>
+  <main id="view"></main>
+  <nav aria-label="Principal"><div class="tabs">
+    <button class="tab" data-a="tab" data-t="cursos">Cursos</button>
+    <button class="tab" data-a="tab" data-t="alunos">Alunos</button>
+    <button class="tab" data-a="tab" data-t="emitir">Emitir</button>
+    <button class="tab" data-a="tab" data-t="certs">Certificados</button>
+    <button class="tab" data-a="tab" data-t="ajustes">Ajustes</button>
+  </div></nav>
+</div>
+<div id="modal" hidden><div class="modal-card" id="modal-card"></div></div>
+<div id="cert-overlay" hidden>
+  <div class="cert-bar no-print">
+    <button class="btn" data-a="print">Imprimir ou salvar PDF</button>
+    <button class="btn ghost" data-a="cert-x">Fechar</button>
+  </div>
+  <div id="cert-box"><div id="cert-scale"></div></div>
+</div>
+<div id="toast" role="status" hidden></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+/* ============ Dados: NRs, treinamentos e aulas ============
+   t: treinamentos [nome, carga horária (h), validade em meses ou null]
+   a: aulas [título, resumo]
+   Os valores são de referência e podem ser editados no app. */
+const NRS=[
+{n:1,nome:'Disposições Gerais e Gerenciamento de Riscos Ocupacionais',t:[['Integração e treinamento admissional em SST',8,null]],a:[
+['Objetivo e campo de aplicação','Como as Normas Regulamentadoras se organizam e a quem se aplicam.'],
+['Direitos e deveres','Responsabilidades do empregador e do trabalhador, incluindo o direito de recusa diante de risco grave e iminente.'],
+['Gerenciamento de Riscos Ocupacionais (GRO)','Identificar perigos, avaliar riscos e definir medidas de prevenção.'],
+['Programa de Gerenciamento de Riscos (PGR)','Inventário de riscos e plano de ação como base das medidas de controle.'],
+['Capacitação e treinamentos','Quando o treinamento é exigido, conteúdo, carga horária e registro em certificado.'],
+['Preparação para emergências','Procedimentos básicos de resposta e abandono em situações de emergência.']]},
+{n:2,nome:'Inspeção Prévia',r:1,t:[],a:[]},
+{n:3,nome:'Embargo e Interdição',t:[],a:[
+['Conceitos de embargo e interdição','Diferença entre paralisar uma obra e paralisar setor, máquina ou equipamento.'],
+['Quando se aplica','Situações de grave e iminente risco constatadas pela inspeção do trabalho.'],
+['Levantamento da medida','Providências para liberar a atividade após a correção das irregularidades.']]},
+{n:4,nome:'Serviços Especializados em Segurança e em Medicina do Trabalho (SESMT)',t:[],a:[
+['Finalidade do SESMT','Promover a saúde e proteger a integridade do trabalhador no ambiente de trabalho.'],
+['Composição e dimensionamento','Relação entre grau de risco, número de empregados e profissionais exigidos.'],
+['Atribuições dos profissionais','Atuação do técnico, do engenheiro, do médico e do enfermeiro do trabalho.'],
+['SESMT comum e regionalizado','Possibilidade de serviços compartilhados entre empresas.']]},
+{n:5,nome:'Comissão Interna de Prevenção de Acidentes e de Assédio (CIPA)',t:[['Treinamento de membros da CIPA',20,12],['Treinamento de designado da CIPA',8,null]],a:[
+['Organização e atribuições da CIPA','Constituição, composição e papel da comissão na prevenção de acidentes e doenças.'],
+['Processo eleitoral e mandato','Etapas da eleição, posse e duração do mandato.'],
+['Identificação de perigos e riscos','Participação da CIPA no mapeamento de riscos e no PGR.'],
+['Investigação e análise de acidentes','Como investigar, registrar causas e propor medidas.'],
+['Prevenção de assédio e violência','Reconhecimento e encaminhamento de situações de assédio no trabalho.'],
+['Reuniões, atas e SIPAT','Rotina de reuniões, registros e a Semana Interna de Prevenção de Acidentes.']]},
+{n:6,nome:'Equipamento de Proteção Individual (EPI)',t:[['Uso, guarda e conservação de EPI',2,null]],a:[
+['O que é EPI e quando usar','EPI como última barreira, depois das medidas coletivas e administrativas.'],
+['Certificado de Aprovação (CA)','Como verificar o CA e a validade do equipamento.'],
+['Responsabilidades','Deveres do empregador (fornecer, orientar, substituir) e do trabalhador (usar e conservar).'],
+['Seleção, ajuste e higienização','Escolha conforme o risco, ajuste correto e limpeza.'],
+['Guarda, inspeção e substituição','Armazenamento, sinais de desgaste e registro de entrega.']]},
+{n:7,nome:'Programa de Controle Médico de Saúde Ocupacional (PCMSO)',t:[],a:[
+['Objetivo do PCMSO','Promoção e preservação da saúde do conjunto de trabalhadores, integrado ao PGR.'],
+['Exames médicos ocupacionais','Admissional, periódico, de retorno ao trabalho, de mudança de risco e demissional.'],
+['Atestado de Saúde Ocupacional (ASO)','Conteúdo, emissão e arquivamento.'],
+['Relatório analítico','Análise dos resultados e ações de saúde decorrentes.'],
+['Primeiros socorros','Preparo para o atendimento inicial a acidentes e mal súbito.']]},
+{n:8,nome:'Edificações',t:[],a:[
+['Requisitos gerais das edificações','Condições de pisos, paredes, coberturas e circulação.'],
+['Circulação e saídas','Largura de passagens, escadas, rampas e saídas desobstruídas.'],
+['Proteção contra intempéries e iluminação','Conforto e segurança nos locais de trabalho.']]},
+{n:9,nome:'Avaliação e Controle das Exposições Ocupacionais a Agentes Físicos, Químicos e Biológicos',t:[['Informação sobre exposições ocupacionais',4,null]],a:[
+['Agentes físicos, químicos e biológicos','Conceitos, fontes e vias de exposição.'],
+['Reconhecimento e avaliação','Como as exposições são reconhecidas e quantificadas.'],
+['Medidas de prevenção e controle','Eliminação, redução na fonte, medidas coletivas e EPI.'],
+['Relação com o PGR','Registro das avaliações no inventário de riscos.']]},
+{n:10,nome:'Segurança em Instalações e Serviços em Eletricidade',t:[['NR-10 Básico',40,24],['NR-10 Complementar - SEP (Sistema Elétrico de Potência)',40,24]],a:[
+['Introdução à segurança com eletricidade','Conceitos básicos e importância da prevenção.'],
+['Riscos em instalações e serviços com eletricidade','Choque elétrico, arco elétrico, queimaduras e campos eletromagnéticos.'],
+['Técnicas de análise de risco','Identificação e avaliação dos riscos antes de intervir.'],
+['Medidas de controle do risco elétrico','Desenergização, aterramento, bloqueio e etiquetagem, isolação.'],
+['Normas técnicas e regulamentações','Normas aplicáveis às instalações e aos serviços.'],
+['Equipamentos de proteção coletiva e individual','Seleção, inspeção e uso.'],
+['Rotinas de trabalho e procedimentos','Ordem de serviço, permissão de trabalho e procedimentos padronizados.'],
+['Documentação das instalações elétricas','Prontuário, diagramas e registros.'],
+['Proteção e combate a incêndios','Riscos de incêndio em instalações elétricas e uso de extintores.'],
+['Acidentes de origem elétrica e primeiros socorros','Condutas de emergência e resgate.']]},
+{n:11,nome:'Transporte, Movimentação, Armazenagem e Manuseio de Materiais',t:[['Operador de empilhadeira e equipamentos de movimentação',16,null]],a:[
+['Equipamentos de movimentação e seus riscos','Empilhadeiras, pontes rolantes, talhas e transportadores.'],
+['Inspeção antes da operação','Checklist diário e comunicação de defeitos.'],
+['Operação segura','Capacidade de carga, velocidade, rampas e visibilidade.'],
+['Armazenagem e empilhamento','Estabilidade das pilhas e uso de paletes.'],
+['Circulação e sinalização','Separação entre pedestres e equipamentos.'],
+['Movimentação manual de cargas','Postura e limites de esforço.']]},
+{n:12,nome:'Segurança no Trabalho em Máquinas e Equipamentos',t:[['Capacitação para operação segura de máquinas e equipamentos',8,null]],a:[
+['Princípios gerais e responsabilidades','Quem responde pela segurança de máquinas e equipamentos.'],
+['Proteções e dispositivos de segurança','Proteções fixas e móveis, intertravamentos e cortinas de luz.'],
+['Dispositivos de parada de emergência','Função, localização e teste.'],
+['Bloqueio e sinalização na manutenção','Impedir o acionamento acidental durante intervenções.'],
+['Manutenção, inspeção e ajustes','Procedimentos seguros e registros.'],
+['Ergonomia na operação','Postos de trabalho, comandos e posturas.']]},
+{n:13,nome:'Caldeiras, Vasos de Pressão, Tubulações e Tanques Metálicos de Armazenamento',t:[['Operador de caldeira',40,null],['Operador de vaso de pressão',16,null]],a:[
+['Conceitos e classificação','Tipos de caldeiras e vasos e como são classificados.'],
+['Dispositivos de segurança','Válvulas de segurança, manômetros e instrumentos de controle.'],
+['Operação segura','Partida, operação normal e parada.'],
+['Inspeção e manutenção','Inspeções periódicas e registros.'],
+['Prontuário e documentação','Documentos que acompanham o equipamento.'],
+['Situações de emergência','Condutas diante de falhas e vazamentos.']]},
+{n:14,nome:'Fornos',t:[],a:[
+['Instalação e construção de fornos','Requisitos de projeto e isolamento térmico.'],
+['Operação e manutenção','Procedimentos seguros e controle de temperatura.'],
+['Riscos e proteções','Queimaduras, gases e medidas de proteção.']]},
+{n:15,nome:'Atividades e Operações Insalubres',t:[],a:[
+['Conceito de insalubridade','Quando uma atividade é considerada insalubre.'],
+['Agentes e limites de tolerância','Ruído, calor, vibração, agentes químicos e biológicos.'],
+['Graus de insalubridade','Grau mínimo, médio e máximo e o adicional correspondente.'],
+['Eliminação e neutralização','Medidas que reduzem ou eliminam a insalubridade.']]},
+{n:16,nome:'Atividades e Operações Perigosas',t:[],a:[
+['Conceito de periculosidade','Atividades que expõem o trabalhador a risco acentuado.'],
+['Atividades perigosas','Explosivos, inflamáveis, energia elétrica, segurança pessoal e patrimonial, motocicleta, radiações ionizantes.'],
+['Adicional de periculosidade','Quando é devido e como é caracterizado em laudo.']]},
+{n:17,nome:'Ergonomia',t:[['Ergonomia: orientação aos trabalhadores',4,null]],a:[
+['Conceitos de ergonomia','Adaptação do trabalho às características das pessoas.'],
+['Avaliação ergonômica preliminar e AET','Quando cada uma é necessária.'],
+['Organização do trabalho','Ritmo, pausas e conteúdo das tarefas.'],
+['Mobiliário e postos de trabalho','Ajustes de cadeira, mesa, monitor e bancadas.'],
+['Levantamento e transporte manual de cargas','Técnicas e limites de esforço.'],
+['Prevenção de lesões musculoesqueléticas','Sinais precoces e hábitos preventivos.']]},
+{n:18,nome:'Segurança e Saúde no Trabalho na Indústria da Construção',t:[['Admissional na indústria da construção',6,null]],a:[
+['Gerenciamento de riscos na construção','PGR da obra e responsabilidades.'],
+['Áreas de vivência','Instalações sanitárias, vestiários, refeitório e alojamento.'],
+['Escavações e fundações','Escoramento e proteção contra desmoronamento.'],
+['Andaimes e plataformas de trabalho','Montagem, inspeção e uso seguro.'],
+['Proteção contra queda de altura','Guarda-corpos, redes e sistemas de ancoragem.'],
+['Instalações elétricas provisórias','Quadros, aterramento e proteção.'],
+['Máquinas e equipamentos da obra','Operação e inspeção.'],
+['Demolição','Planejamento e etapas seguras.']]},
+{n:19,nome:'Explosivos',t:[],a:[
+['Conceitos e classificação','Explosivos, acessórios e suas características de perigo.'],
+['Armazenamento e transporte','Paióis, distâncias de segurança e controle.'],
+['Riscos e emergência','Prevenção de acidentes e resposta a ocorrências.']]},
+{n:20,nome:'Segurança e Saúde no Trabalho com Inflamáveis e Combustíveis',t:[['NR-20 Básico',8,null],['NR-20 Intermediário',16,null],['NR-20 Avançado I',20,null],['NR-20 Avançado II',32,null]],a:[
+['Princípios sobre inflamáveis e combustíveis','Propriedades, ponto de fulgor e limites de inflamabilidade.'],
+['Classes de instalações e riscos','Como as instalações são classificadas.'],
+['Riscos de incêndio e explosão','Triângulo do fogo e atmosferas explosivas.'],
+['Controle de fontes de ignição','Eletricidade estática, trabalhos a quente e áreas classificadas.'],
+['Inspeção e manutenção','Procedimentos e registros.'],
+['Permissão de trabalho','Quando é exigida e como é preenchida.'],
+['Plano de resposta a emergências','Combate a princípio de incêndio, evacuação e vazamentos.']]},
+{n:21,nome:'Trabalhos a Céu Aberto',t:[],a:[
+['Proteção contra intempéries','Abrigos, sol, chuva e frio.'],
+['Condições de trabalho ao ar livre','Água potável, instalações sanitárias e descanso.'],
+['Raios e tempestades','Condutas preventivas durante tempestades.']]},
+{n:22,nome:'Segurança e Saúde Ocupacional na Mineração',t:[],a:[
+['Gerenciamento de riscos na mineração','Perigos da lavra e do beneficiamento.'],
+['Segurança em operações a céu aberto e subterrâneas','Estabilidade, ventilação e transporte.'],
+['Emergências em mineração','Planos de resposta e abandono.']]},
+{n:23,nome:'Proteção Contra Incêndios',t:[['Brigada de incêndio',8,null]],a:[
+['Teoria do fogo','Combustível, comburente, calor e reação em cadeia.'],
+['Classes de incêndio e agentes extintores','Qual extintor usar em cada tipo de fogo.'],
+['Uso de extintores e hidrantes','Manuseio, alcance e tempo de resposta.'],
+['Rotas de fuga e saídas de emergência','Sinalização e desobstrução.'],
+['Plano de emergência e abandono','Alarme, evacuação e ponto de encontro.'],
+['Simulados','Planejamento, execução e avaliação.']]},
+{n:24,nome:'Condições Sanitárias e de Conforto nos Locais de Trabalho',t:[],a:[
+['Instalações sanitárias e vestiários','Quantidade, limpeza e privacidade.'],
+['Refeitórios e locais para refeição','Condições mínimas de higiene e conforto.'],
+['Água potável e alojamentos','Fornecimento e condições de uso.']]},
+{n:25,nome:'Resíduos Industriais',t:[],a:[
+['Classificação dos resíduos','Perigosos e não perigosos.'],
+['Acondicionamento e transporte interno','Recipientes, identificação e rotas.'],
+['Destinação e tratamento','Responsabilidades do gerador e destino adequado.']]},
+{n:26,nome:'Sinalização de Segurança',t:[['Rotulagem e Ficha de Dados de Segurança (FDS) de produtos químicos',4,null]],a:[
+['Cores na segurança do trabalho','Significado das cores de segurança.'],
+['Rotulagem preventiva','Elementos do rótulo de produtos químicos.'],
+['Pictogramas e classificação de perigo','Sistema Globalmente Harmonizado (GHS).'],
+['Ficha de Dados de Segurança (FDS)','Como ler e consultar as informações.'],
+['Sinalização de áreas e equipamentos','Placas, faixas e identificação de tubulações.']]},
+{n:27,nome:'Registro Profissional do Técnico de Segurança do Trabalho',r:1,t:[],a:[]},
+{n:28,nome:'Fiscalização e Penalidades',t:[],a:[
+['Fiscalização do trabalho','Como ocorre a inspeção e os documentos solicitados.'],
+['Autos de infração e penalidades','Tipos de infração e critérios de aplicação.'],
+['Defesa e recursos','Prazos e etapas do processo.']]},
+{n:29,nome:'Segurança e Saúde no Trabalho Portuário',t:[],a:[
+['Riscos da atividade portuária','Operações de carga e descarga.'],
+['Equipamentos de movimentação portuária','Guindastes, empilhadeiras e acessórios de içamento.'],
+['Emergências no ambiente portuário','Planos e condutas.']]},
+{n:30,nome:'Segurança e Saúde no Trabalho Aquaviário',t:[],a:[
+['Riscos no trabalho a bordo','Ambiente embarcado e rotina de trabalho.'],
+['Equipamentos de salvatagem','Coletes, balsas e sinais de socorro.'],
+['Emergências a bordo','Abandono, incêndio e homem ao mar.']]},
+{n:31,nome:'Segurança e Saúde no Trabalho na Agricultura, Pecuária, Silvicultura, Exploração Florestal e Aquicultura',t:[],a:[
+['Riscos da atividade rural','Clima, animais, ferramentas e máquinas.'],
+['Agrotóxicos e adjuvantes','Manuseio, aplicação, EPI e descarte de embalagens.'],
+['Máquinas e implementos agrícolas','Operação segura e proteções.'],
+['Ergonomia no trabalho rural','Esforço físico e posturas.'],
+['Condições de vivência no campo','Água, sanitários e alojamento.']]},
+{n:32,nome:'Segurança e Saúde no Trabalho em Serviços de Saúde',t:[],a:[
+['Riscos biológicos','Agentes, vias de transmissão e vacinação.'],
+['Precauções padrão','Higiene das mãos, EPI e descarte correto.'],
+['Perfurocortantes','Prevenção de acidentes e conduta pós-exposição.'],
+['Resíduos de serviços de saúde','Segregação, acondicionamento e destinação.'],
+['Radiações ionizantes e substâncias químicas','Proteção e controle da exposição.']]},
+{n:33,nome:'Segurança e Saúde nos Trabalhos em Espaços Confinados',t:[['Trabalhador autorizado e vigia',16,12],['Supervisor de entrada',40,24]],a:[
+['Reconhecimento de espaços confinados','Definição e características.'],
+['Riscos em espaços confinados','Atmosferas perigosas, engolfamento e ambientes com pouco oxigênio.'],
+['Medição e monitoramento da atmosfera','Equipamentos e critérios de liberação.'],
+['Permissão de Entrada e Trabalho (PET)','Quando é exigida e como é emitida.'],
+['Funções e responsabilidades','Vigia, trabalhador autorizado e supervisor de entrada.'],
+['Proteção, comunicação e resgate','Equipamentos e procedimentos de salvamento.'],
+['Procedimentos de emergência','Condutas diante de intercorrências.']]},
+{n:34,nome:'Condições e Meio Ambiente de Trabalho na Indústria da Construção, Reparação e Desmonte Naval',t:[],a:[
+['Riscos na construção e reparação naval','Ambientes confinados, altura e trabalhos a quente.'],
+['Trabalhos a quente','Solda, corte e prevenção de incêndio.'],
+['Movimentação de cargas e acesso seguro','Içamento, andaimes e acessos.']]},
+{n:35,nome:'Trabalho em Altura',t:[['Trabalho em altura',8,24]],a:[
+['Normas e regulamentos aplicáveis','Base legal e responsabilidades.'],
+['Análise de risco e condições impeditivas','Quando o trabalho em altura não deve ser iniciado.'],
+['Riscos potenciais e medidas de prevenção','Queda de pessoas e de materiais, e como evitá-las.'],
+['Sistemas, equipamentos e procedimentos de proteção coletiva','Guarda-corpos, linhas de vida e redes.'],
+['EPI para trabalho em altura','Seleção, inspeção, conservação e limitações de uso.'],
+['Acidentes típicos','Causas mais comuns e lições aprendidas.'],
+['Condutas em emergências','Noções de resgate e primeiros socorros.']]},
+{n:36,nome:'Segurança e Saúde no Trabalho em Empresas de Abate e Processamento de Carnes e Derivados',t:[],a:[
+['Riscos no abate e processamento','Facas, máquinas, esforço repetitivo e agentes biológicos.'],
+['Ambientes artificialmente frios','Proteção térmica e pausas.'],
+['Ergonomia e organização do trabalho','Ritmo, pausas e rodízio de tarefas.']]},
+{n:37,nome:'Segurança e Saúde em Plataformas de Petróleo',t:[],a:[
+['Riscos em plataformas','Inflamáveis, altura e confinamento.'],
+['Permissões de trabalho','Controle das atividades de risco.'],
+['Emergência e abandono','Exercícios, rotas e equipamentos de salvatagem.']]},
+{n:38,nome:'Segurança e Saúde no Trabalho nas Atividades de Limpeza Urbana e Manejo de Resíduos Sólidos',t:[],a:[
+['Riscos na coleta e limpeza urbana','Trânsito, ergonomia, agentes biológicos e perfurocortantes.'],
+['EPI e vestimentas','Visibilidade, luvas, calçados e proteção.'],
+['Condutas seguras na operação','Embarque, desembarque e operação junto a veículos.']]}
+];
+
+/* ============ Utilidades ============ */
+const $=(s,r=document)=>r.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad=n=>String(n).padStart(2,'0');
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const norm=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+const MESES=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+const TIPOS={inicial:'Formação inicial',reciclagem:'Reciclagem',periodico:'Treinamento periódico'};
+function isoHoje(){const t=new Date();return `${t.getFullYear()}-${pad(t.getMonth()+1)}-${pad(t.getDate())}`}
+function fmt(d){return d?d.split('-').reverse().join('/'):''}
+function fmtLong(d){if(!d)return '';const [y,m,da]=d.split('-').map(Number);return `${da} de ${MESES[m-1]} de ${y}`}
+function addMonths(iso,m){const [y,mo,da]=iso.split('-').map(Number);const dt=new Date(y,mo-1+m,1);const last=new Date(dt.getFullYear(),dt.getMonth()+1,0).getDate();dt.setDate(Math.min(da,last));return `${dt.getFullYear()}-${pad(dt.getMonth()+1)}-${pad(dt.getDate())}`}
+function diasAte(iso){const [y,m,d]=iso.split('-').map(Number);const t=new Date();const h=new Date(t.getFullYear(),t.getMonth(),t.getDate());return Math.round((new Date(y,m-1,d)-h)/86400000)}
+function maskCPF(v){const d=v.replace(/\D/g,'').slice(0,11);return d.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2')}
+let toastT;function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>{t.hidden=true},3500)}
+
+/* ============ Estado e armazenamento ============ */
+const KEY='sst-treinamentos-v1'; // chave antiga (versão sem login), usada só para migrar dados
+const VAZIO=()=>({cfg:{empresa:'',cnpj:'',cidade:'',local:'',inst:{nome:'',qual:'',reg:''},rt:{nome:'',qual:'',reg:''},logo:''},alunos:[],certs:[],over:{}});
+let S=VAZIO();
+function merge(o){const b=VAZIO();const c=o.cfg||{};S={cfg:{...b.cfg,...c,inst:{...b.cfg.inst,...(c.inst||{})},rt:{...b.cfg.rt,...(c.rt||{})}},alunos:Array.isArray(o.alunos)?o.alunos:[],certs:Array.isArray(o.certs)?o.certs:[],over:o.over&&typeof o.over==='object'?o.over:{}}}
+
+/* ============ Supabase (login + banco de dados) ============ */
+const SUPA_URL='https://xiqxoaxdshsydzgfpnil.supabase.co';
+const SUPA_KEY='sb_publishable_6-bP0nY1Avpmu_HMp7gvuA_QoCCXtCy';
+let sb=null,SESS=null;
+try{sb=window.supabase.createClient(SUPA_URL,SUPA_KEY)}catch(e){console.error(e)}
+const meuId=()=>SESS&&SESS.user?SESS.user.id:null;
+async function dbRun(p,msg){
+  try{const r=await p;if(r&&r.error)throw r.error;return true}
+  catch(e){console.error(e);toast(msg||'Não foi possível salvar na nuvem. Verifique a conexão e tente de novo.');return false}
+}
+const CONF={onConflict:'user_id,id'};
+const P={
+  perfil(){return dbRun(sb.from('perfis').upsert({user_id:meuId(),cfg:S.cfg,over:S.over,updated_at:new Date().toISOString()},{onConflict:'user_id'}))},
+  aluno(a){return dbRun(sb.from('alunos').upsert({user_id:meuId(),id:a.id,dados:a},CONF))},
+  alunos(l){return l.length?dbRun(sb.from('alunos').upsert(l.map(a=>({user_id:meuId(),id:a.id,dados:a})),CONF)):Promise.resolve(true)},
+  alunoDel(id){return dbRun(sb.from('alunos').delete().eq('id',id))},
+  certs(l){return l.length?dbRun(sb.from('certificados').upsert(l.map(c=>({user_id:meuId(),id:c.id,dados:c,validade:c.validade||null})),CONF)):Promise.resolve(true)},
+  certDel(id){return dbRun(sb.from('certificados').delete().eq('id',id))}
+};
+async function loadCloud(){
+  const [p,a,c]=await Promise.all([
+    sb.from('perfis').select('cfg,over').maybeSingle(),
+    sb.from('alunos').select('dados').order('created_at'),
+    sb.from('certificados').select('dados').order('created_at',{ascending:false})
+  ]);
+  const err=p.error||a.error||c.error;if(err)throw err;
+  merge({cfg:p.data&&p.data.cfg,over:p.data&&p.data.over,alunos:(a.data||[]).map(r=>r.dados),certs:(c.data||[]).map(r=>r.dados)});
+}
+async function pushAll(){await P.perfil();await P.alunos(S.alunos);await P.certs(S.certs)}
+async function unir(o){
+  const b=VAZIO();const ai=new Set(S.alunos.map(a=>a.id)),ci=new Set(S.certs.map(c=>c.id));
+  (o.alunos||[]).forEach(a=>{if(a&&a.id&&!ai.has(a.id))S.alunos.push(a)});
+  (o.certs||[]).forEach(c=>{if(c&&c.id&&!ci.has(c.id))S.certs.push(c)});
+  const vazio=!S.cfg.empresa&&!S.cfg.inst.nome&&!S.cfg.rt.nome;
+  if(vazio&&o.cfg){const c=o.cfg;S.cfg={...b.cfg,...c,inst:{...b.cfg.inst,...(c.inst||{})},rt:{...b.cfg.rt,...(c.rt||{})}}}
+  if(o.over&&typeof o.over==='object'&&!Object.keys(S.over).length)S.over=o.over;
+  await pushAll();render();
+}
+function dadosLocais(){try{const r=localStorage.getItem(KEY);const o=r?JSON.parse(r):null;return o&&((o.alunos&&o.alunos.length)||(o.certs&&o.certs.length))?o:null}catch(e){return null}}
+
+/* ============ Login ============ */
+const U_AUTH={modo:'entrar',email:'',recov:false};
+function authView(){
+  const a=U_AUTH;
+  if(a.recov)return `<div style="max-width:420px;margin:24px auto 0"><h1>Nova senha</h1><p class="sub">Escolha uma nova senha para a sua conta.</p>
+  <div class="card"><label>Nova senha (mínimo 8 caracteres)<input id="au-senha" class="inp" type="password" autocomplete="new-password"></label>
+  <button class="btn big" data-a="au-go" style="margin-top:4px">Salvar nova senha</button></div></div>`;
+  const t={entrar:'Entrar',criar:'Criar conta',esqueci:'Recuperar senha'}[a.modo];
+  const sub={entrar:'Acesse seus treinamentos de qualquer aparelho.',criar:'Sua conta guarda alunos, certificados e ajustes na nuvem. Cada conta vê somente os próprios dados.',esqueci:'Informe o e-mail da conta. Enviaremos um link para criar uma nova senha.'}[a.modo];
+  return `<div style="max-width:420px;margin:24px auto 0"><h1>${t}</h1><p class="sub">${sub}</p>
+  <div class="card"><label>E-mail<input id="au-email" class="inp" type="email" autocomplete="email" value="${esc(a.email)}"></label>
+  ${a.modo!=='esqueci'?`<label>Senha${a.modo==='criar'?' (mínimo 8 caracteres)':''}<input id="au-senha" class="inp" type="password" autocomplete="${a.modo==='criar'?'new-password':'current-password'}"></label>`:''}
+  <button class="btn big" data-a="au-go" style="margin-top:4px">${a.modo==='esqueci'?'Enviar link':t}</button></div>
+  <p class="note">${a.modo==='entrar'?'<button class="link" data-a="au-mode" data-m="criar">Criar conta</button> · <button class="link" data-a="au-mode" data-m="esqueci">Esqueci a senha</button>':'<button class="link" data-a="au-mode" data-m="entrar">Voltar para entrar</button>'}</p></div>`;
+}
+function showAuth(){$('nav').hidden=true;$('#view').innerHTML=authView();scrollTo(0,0)}
+function msgAuth(e){
+  const m=String(e&&e.message||'').toLowerCase();
+  if(m.includes('invalid login'))return 'E-mail ou senha incorretos.';
+  if(m.includes('not confirmed'))return 'Confirme seu e-mail pelo link que enviamos antes de entrar.';
+  if(m.includes('already registered'))return 'Este e-mail já tem conta. Use Entrar.';
+  if(m.includes('rate limit')||m.includes('too many'))return 'Muitas tentativas. Aguarde alguns minutos.';
+  if(m.includes('password'))return 'Senha inválida. Use pelo menos 8 caracteres.';
+  return 'Não foi possível concluir. Tente novamente.';
+}
+function erroBanco(){
+  return `<div style="max-width:460px;margin:24px auto 0"><h1>Banco de dados não respondeu</h1>
+  <p class="sub">Confira se o arquivo schema.sql foi executado no Supabase (SQL Editor) e se há conexão com a internet.</p>
+  <div class="btns"><button class="btn" data-a="retry">Tentar de novo</button><button class="btn ghost" data-a="logout">Sair</button></div></div>`;
+}
+async function entrar(){
+  $('nav').hidden=true;$('#view').innerHTML='<p class="empty">Carregando seus dados...</p>';
+  try{await loadCloud()}catch(e){console.error(e);$('#view').innerHTML=erroBanco();return}
+  $('nav').hidden=false;U.tab='cursos';U.nr=null;render();scrollTo(0,0);
+}
+async function boot(){
+  {const t=trains(getNR(35))[0];U.emit.horas=t&&t.horas?t.horas:''}
+  if(!sb){$('nav').hidden=true;$('#view').innerHTML='<p class="empty">Não foi possível carregar o serviço de login. Verifique a conexão com a internet e recarregue a página.</p>';return}
+  sb.auth.onAuthStateChange((ev,s)=>{
+    SESS=s;
+    if(ev==='PASSWORD_RECOVERY'){U_AUTH.recov=true;showAuth()}
+    else if(ev==='SIGNED_OUT'){S=VAZIO();U_AUTH.recov=false;showAuth()}
+  });
+  const r=await sb.auth.getSession();SESS=r.data&&r.data.session;
+  if(U_AUTH.recov)return;
+  if(SESS)await entrar();else showAuth();
+}
+
+const U={tab:'cursos',nr:null,q:'',cq:'',cf:'todos',editA:null,emit:{nr:35,ti:0,tipo:'inicial',horas:'',ini:'',fim:'',local:'',sel:[]}};
+const getNR=n=>NRS.find(x=>x.n===n);
+const trains=nr=>S.over[nr.n]||nr.t.map(([nome,horas,val])=>({nome,horas,val}));
+const tile=nr=>`<span class="sign ${nr.r?'off':''}"><small>NR</small><b>${pad(nr.n)}</b></span>`;
+
+/* ============ Telas ============ */
+function render(){
+  const v=$('#view');
+  const m={cursos:()=>U.nr!=null?cursoDetalhe():cursosLista(),alunos:alunosView,emitir:emitirView,certs:certsView,ajustes:ajustesView};
+  v.innerHTML=m[U.tab]();
+  document.querySelectorAll('.tab').forEach(b=>{if(b.dataset.t===U.tab)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
+}
+
+function cursosLista(){
+  const vig=NRS.filter(n=>!n.r).length;
+  return `<h1>Normas Regulamentadoras</h1>
+  <p class="sub">${vig} NRs vigentes com aulas e treinamentos. Toque em uma NR para ver o conteúdo e emitir certificados.</p>
+  <input id="busca" class="inp" type="search" placeholder="Buscar por número ou nome (ex.: 35, altura)" value="${esc(U.q)}" aria-label="Buscar NR">
+  <div id="lista" style="margin-top:12px">${listaHTML()}</div>`;
+}
+function listaHTML(){
+  const q=norm(U.q).replace(/^nr[\s-]*/,'');
+  const r=NRS.filter(n=>!q||String(n.n)===q||norm(n.nome).includes(q)||norm('nr '+n.n).includes(norm(U.q)));
+  if(!r.length)return '<p class="empty">Nenhuma NR encontrada. Tente o número ou parte do nome.</p>';
+  return r.map(n=>{
+    const nt=trains(n).length;
+    const meta=n.r?'Norma revogada':`${nt?nt+(nt>1?' treinamentos':' treinamento'):'Sem treinamento cadastrado'} · ${n.a.length} aulas`;
+    return `<button class="item" data-a="abrir" data-n="${n.n}">${tile(n)}<span><b>${esc(n.nome)}</b><span class="meta">${meta}</span></span></button>`;
+  }).join('');
+}
+function cursoDetalhe(){
+  const nr=getNR(U.nr);const ts=trains(nr);
+  let h=`<button class="back" data-a="voltar">‹ Voltar às NRs</button>
+  <div class="head">${tile(nr)}<div><h1>NR-${nr.n}</h1><p class="sub">${esc(nr.nome)}</p></div></div>`;
+  if(nr.r)return h+'<p class="empty">Esta norma foi revogada e não gera treinamento.</p>';
+  h+='<h2>Treinamentos</h2>';
+  h+=ts.length?ts.map((t,i)=>`<div class="card"><b>${esc(t.nome)}</b>
+    <p class="meta">${t.horas?t.horas+' h':'Carga horária a definir'} · ${t.val?'validade de '+t.val+' meses':'sem validade definida'}</p>
+    <div class="btns"><button class="btn" data-a="emitir-de" data-n="${nr.n}" data-i="${i}">Emitir certificado</button><button class="btn ghost" data-a="edit-t" data-n="${nr.n}" data-i="${i}">Editar</button></div></div>`).join('')
+    :'<p class="empty">Esta NR não tem treinamento com carga horária própria cadastrado. Adicione um para emitir certificados.</p>';
+  h+=`<button class="btn ghost" data-a="novo-t" data-n="${nr.n}">Adicionar treinamento</button>
+  <p class="note">Cargas horárias e validades são valores de referência. Confira na versão vigente da NR e ajuste em Editar.</p>
+  <h2>Aulas (${nr.a.length})</h2>`;
+  h+=nr.a.map(([t,d],i)=>`<details class="aula"><summary><span class="idx">${i+1}</span><span>${esc(t)}</span></summary><p>${esc(d)}</p></details>`).join('');
+  return h;
+}
+
+function alunosView(){
+  const a=U.editA?S.alunos.find(x=>x.id===U.editA):null;
+  const lista=S.alunos.slice().sort((x,y)=>x.nome.localeCompare(y.nome,'pt-BR'));
+  return `<h1>Alunos</h1><p class="sub">Cadastre uma vez e use em quantos certificados precisar.</p>
+  <div class="card"><label>Nome completo<input id="a-nome" class="inp" autocomplete="off" value="${esc(a?.nome)}"></label>
+  <div class="two"><label>CPF<input id="a-cpf" class="inp" inputmode="numeric" maxlength="14" value="${esc(a?.cpf)}"></label>
+  <label>Função<input id="a-fun" class="inp" value="${esc(a?.funcao)}"></label></div>
+  <label>Empresa do aluno (opcional)<input id="a-emp" class="inp" value="${esc(a?.empresa)}"></label>
+  <div class="btns" style="margin-top:0"><button class="btn" data-a="a-save">${a?'Salvar alterações':'Cadastrar aluno'}</button>${a?'<button class="btn ghost" data-a="a-cancel">Cancelar</button>':''}</div></div>
+  <h2>Cadastrados (${lista.length})</h2>
+  ${lista.length?lista.map(x=>`<div class="card"><div class="row"><div><b>${esc(x.nome)}</b><p class="meta">${[x.cpf&&'CPF '+x.cpf,x.funcao,x.empresa].filter(Boolean).map(esc).join(' · ')||'Sem outros dados'}</p></div></div>
+  <div class="btns"><button class="btn ghost" data-a="a-edit" data-id="${x.id}">Editar</button><button class="btn danger" data-a="a-del" data-id="${x.id}">Excluir</button></div></div>`).join(''):'<p class="empty">Nenhum aluno ainda. Cadastre o primeiro acima.</p>'}`;
+}
+
+function valPrev(){
+  const e=U.emit;const t=trains(getNR(e.nr))[e.ti];
+  if(!t)return '';
+  if(!t.val)return 'Este treinamento não tem validade definida.';
+  return e.fim?`Validade até ${fmt(addMonths(e.fim,t.val))}.`:`Validade de ${t.val} meses a partir do término.`;
+}
+function emitirView(){
+  const e=U.emit;const nrs=NRS.filter(n=>!n.r);const nr=getNR(e.nr);const ts=trains(nr);
+  e.ti=Math.min(e.ti,Math.max(ts.length-1,0));
+  const alunos=S.alunos.slice().sort((x,y)=>x.nome.localeCompare(y.nome,'pt-BR'));
+  return `<h1>Emitir certificados</h1><p class="sub">Escolha a NR, o treinamento e os alunos da turma. Cada aluno recebe um certificado com verso de conteúdo programático.</p>
+  <div class="card">
+  <label>NR<select id="e-nr" data-ch="e-nr">${nrs.map(n=>`<option value="${n.n}" ${n.n===e.nr?'selected':''}>NR-${n.n} · ${esc(n.nome)}</option>`).join('')}</select></label>
+  ${ts.length?`<label>Treinamento<select id="e-ti" data-ch="e-ti">${ts.map((x,i)=>`<option value="${i}" ${i===e.ti?'selected':''}>${esc(x.nome)}</option>`).join('')}</select></label>`
+  :`<p class="note">Esta NR ainda não tem treinamento cadastrado. <button class="link" data-a="abrir" data-n="${nr.n}">Cadastrar em Cursos</button></p>`}
+  <label>Tipo<select id="e-tipo">${Object.entries(TIPOS).map(([k,v])=>`<option value="${k}" ${k===e.tipo?'selected':''}>${v}</option>`).join('')}</select></label>
+  <div class="two"><label>Carga horária (h)<input id="e-h" class="inp" type="number" step="0.5" min="0" value="${esc(e.horas)}"></label>
+  <label>Local de realização<input id="e-loc" class="inp" value="${esc(e.local||S.cfg.local)}"></label></div>
+  <div class="two"><label>Início<input id="e-ini" data-ch="e-data" class="inp" type="date" value="${esc(e.ini)}"></label>
+  <label>Término<input id="e-fim" data-ch="e-data" class="inp" type="date" value="${esc(e.fim)}"></label></div>
+  <p id="e-val" class="meta" style="margin:0">${valPrev()}</p></div>
+  <h2>Alunos da turma</h2>
+  ${alunos.length?`<button class="link" data-a="sel-todos" style="margin-bottom:10px">Marcar ou desmarcar todos</button>`+alunos.map(a=>`<label class="chk"><input type="checkbox" data-sel="${a.id}" ${e.sel.includes(a.id)?'checked':''}><span><b>${esc(a.nome)}</b><small>${[a.funcao,a.empresa].filter(Boolean).map(esc).join(' · ')}</small></span></label>`).join('')
+  :'<p class="empty">Cadastre os alunos primeiro. <button class="link" data-a="tab" data-t="alunos">Ir para Alunos</button></p>'}
+  <button class="btn big" data-a="emitir-go">Gerar certificados</button>`;
+}
+
+function certStatus(c){
+  if(!c.validade)return {k:'none',txt:'Sem validade'};
+  const d=diasAte(c.validade);
+  if(d<0)return {k:'bad',txt:'Vencido'};
+  if(d<=60)return {k:'warn',txt:d===0?'Vence hoje':`Vence em ${d} dia${d>1?'s':''}`};
+  return {k:'ok',txt:'Válido'};
+}
+function certsView(){
+  const cnt={ok:0,warn:0,bad:0,none:0};S.certs.forEach(c=>cnt[certStatus(c).k]++);
+  const F=[['todos','Todos',S.certs.length],['ok','Válidos',cnt.ok],['warn','Vencendo',cnt.warn],['bad','Vencidos',cnt.bad]];
+  return `<h1>Certificados emitidos</h1><p class="sub">Acompanhe validades e reimprima quando precisar.</p>
+  <div class="chips">${F.map(([k,l,n])=>`<button class="chip" data-a="filtro" data-f="${k}" aria-pressed="${U.cf===k}">${l} (${n})</button>`).join('')}</div>
+  <input id="cbusca" class="inp" type="search" placeholder="Buscar por aluno ou treinamento" value="${esc(U.cq)}" aria-label="Buscar certificado">
+  <div id="clista" style="margin-top:12px">${certsLista()}</div>`;
+}
+function certsLista(){
+  const q=norm(U.cq);
+  const l=S.certs.filter(c=>(U.cf==='todos'||certStatus(c).k===U.cf)&&(!q||norm(c.aluno+' '+c.trein+' '+c.nrLabel).includes(q)));
+  if(!S.certs.length)return '<p class="empty">Nenhum certificado emitido ainda. Use a aba Emitir.</p>';
+  if(!l.length)return '<p class="empty">Nenhum certificado neste filtro.</p>';
+  return l.map(c=>{const s=certStatus(c);return `<div class="card"><div class="row"><div><b>${esc(c.aluno)}</b>
+  <p class="meta">${esc(c.nrLabel)} · ${esc(c.trein)} · ${c.horas} h</p>
+  <p class="meta">Concluído em ${fmt(c.fim)}${c.validade?' · validade '+fmt(c.validade):''}</p></div><span class="st ${s.k}">${s.txt}</span></div>
+  <div class="btns"><button class="btn ghost" data-a="c-ver" data-id="${c.id}">Ver e imprimir</button><button class="btn danger" data-a="c-del" data-id="${c.id}">Excluir</button></div></div>`}).join('');
+}
+
+function ajustesView(){
+  const c=S.cfg;
+  return `<h1>Ajustes</h1><p class="sub">Estes dados aparecem nos certificados.</p>
+  <div class="card"><b>Empresa ou consultoria</b>
+  <label style="margin-top:8px">Nome<input id="c-emp" class="inp" value="${esc(c.empresa)}"></label>
+  <div class="two"><label>CNPJ<input id="c-cnpj" class="inp" value="${esc(c.cnpj)}"></label><label>Cidade e UF<input id="c-cid" class="inp" value="${esc(c.cidade)}" placeholder="Paranavaí - PR"></label></div>
+  <label>Local padrão dos treinamentos<input id="c-loc" class="inp" value="${esc(c.local)}"></label>
+  <label>Logotipo (opcional)<input id="logo-file" type="file" accept="image/*" class="inp"></label>
+  ${c.logo?`<img class="logo-prev" src="${c.logo}" alt="Logotipo atual"><button class="link" data-a="logo-rm">Remover logotipo</button>`:''}</div>
+  <div class="card"><b>Instrutor</b>
+  <label style="margin-top:8px">Nome<input id="c-in" class="inp" value="${esc(c.inst.nome)}"></label>
+  <label>Qualificação<input id="c-iq" class="inp" value="${esc(c.inst.qual)}" placeholder="Ex.: Técnico em Segurança do Trabalho"></label>
+  <label>Registro profissional<input id="c-ir" class="inp" value="${esc(c.inst.reg)}"></label></div>
+  <div class="card"><b>Responsável técnico</b>
+  <label style="margin-top:8px">Nome<input id="c-rn" class="inp" value="${esc(c.rt.nome)}"></label>
+  <label>Qualificação<input id="c-rq" class="inp" value="${esc(c.rt.qual)}" placeholder="Ex.: Engenheiro de Segurança do Trabalho"></label>
+  <label>Registro profissional<input id="c-rr" class="inp" value="${esc(c.rt.reg)}"></label></div>
+  <button class="btn big" data-a="cfg-save" style="margin-top:0">Salvar ajustes</button>
+  <h2>Conta</h2>
+  <div class="card"><b>${esc(SESS&&SESS.user?SESS.user.email:'')}</b>
+  <p class="meta">Seus dados ficam salvos na nuvem e aparecem em qualquer aparelho em que você entrar.</p>
+  <div class="btns"><button class="btn ghost" data-a="logout">Sair da conta</button></div></div>
+  ${dadosLocais()?`<div class="card"><b>Dados salvos neste navegador</b><p class="meta">Encontramos alunos e certificados da versão anterior, sem login. Envie para a sua conta para não perdê-los.</p>
+  <div class="btns"><button class="btn" data-a="migrar">Enviar para a minha conta</button></div></div>`:''}
+  <h2>Backup dos dados</h2>
+  <p class="note">Baixe uma cópia dos seus dados quando quiser, ou importe um arquivo de backup. Importar soma os dados ao que já existe na conta.</p>
+  <div class="btns" style="margin-top:0"><button class="btn ghost" data-a="export">Exportar backup</button>
+  <button class="btn ghost" data-a="import-btn">Importar backup</button><button class="btn danger" data-a="wipe">Apagar tudo</button></div>
+  <input id="import-file" type="file" accept="application/json,.json" hidden>`;
+}
+
+/* ============ Certificado ============ */
+function certPages(c){
+  const logo=S.cfg.logo?`<img class="c-logo" src="${S.cfg.logo}" alt="">`:'';
+  const periodo=c.ini===c.fim?`no dia ${fmt(c.ini)}`:`no período de ${fmt(c.ini)} a ${fmt(c.fim)}`;
+  const part=[c.cpf&&`CPF ${esc(c.cpf)}`,c.funcao&&`função: ${esc(c.funcao)}`].filter(Boolean).join(', ');
+  const sig=(p,r)=>`<div><b>${esc(p.nome)}</b>${esc(p.qual)}${p.reg?'<br>'+esc(p.reg):''}<br>${r}</div>`;
+  return `<section class="cert-page"><div class="c-band"></div><div class="c-in">
+  <div class="c-head">${logo}<div><b>${esc(c.emp.nome)}</b><span>${c.emp.cnpj?'CNPJ '+esc(c.emp.cnpj):''}</span></div></div>
+  <h1 class="c-title">Certificado de treinamento</h1>
+  <p class="c-sub">${esc(c.nrLabel)} · ${esc(c.nomeNR)}</p>
+  <p class="c-txt">Certificamos que</p>
+  <p class="c-name">${esc(c.aluno)}</p>
+  <p class="c-txt">${part}</p>
+  <p class="c-txt">concluiu o treinamento <b>${esc(c.trein)}</b> (${TIPOS[c.tipo]||''}), com carga horária de <b>${c.horas} horas</b>, realizado ${periodo}, em ${esc(c.local)}.</p>
+  <p class="c-val">${c.validade?'Validade do treinamento: até '+fmt(c.validade)+'.':''}</p>
+  <div class="c-sign">${sig(c.inst,'Instrutor')}${sig(c.rt,'Responsável técnico')}</div>
+  <div class="c-foot"><span>Código ${esc(c.codigo)}</span><span>${c.emp.cidade?esc(c.emp.cidade)+', ':''}${fmtLong(c.emissao)}</span></div>
+  </div></section>
+  <section class="cert-page"><div class="c-band"></div><div class="c-in">
+  <h2 class="c-vt">Conteúdo programático</h2>
+  <p class="c-sub" style="text-align:left;margin-bottom:0">${esc(c.nrLabel)} · ${esc(c.trein)} · ${c.horas} horas</p>
+  <ol class="c-list">${c.aulas.map(a=>`<li>${esc(a)}</li>`).join('')}</ol>
+  <div class="c-meta"><b>Instrutor:</b> ${esc(c.inst.nome)}${c.inst.qual?', '+esc(c.inst.qual):''}${c.inst.reg?' ('+esc(c.inst.reg)+')':''}<br>
+  <b>Responsável técnico:</b> ${esc(c.rt.nome)}${c.rt.qual?', '+esc(c.rt.qual):''}${c.rt.reg?' ('+esc(c.rt.reg)+')':''}<br>
+  <b>Local:</b> ${esc(c.local)} · <b>Realização:</b> ${periodo.replace('no dia ','').replace('no período de ','')} · <b>Código:</b> ${esc(c.codigo)}</div>
+  </div></section>`;
+}
+function openCerts(ids){
+  const list=ids.map(id=>S.certs.find(c=>c.id===id)).filter(Boolean);
+  $('#cert-scale').innerHTML=list.map(certPages).join('');
+  $('#cert-overlay').hidden=false;document.body.style.overflow='hidden';
+  $('#cert-overlay').scrollTop=0;fit();
+}
+function fit(){
+  const o=$('#cert-overlay');if(o.hidden)return;
+  const w=297*96/25.4;const sc=Math.min(1,(window.innerWidth-24)/w);
+  const s=$('#cert-scale'),b=$('#cert-box');
+  s.style.transform=`scale(${sc})`;
+  b.style.width=(w*sc)+'px';b.style.height=(s.offsetHeight*sc)+'px';
+}
+window.addEventListener('resize',fit);
+
+/* ============ Modal ============ */
+function modal(html){$('#modal-card').innerHTML=html;$('#modal').hidden=false}
+function closeModal(){$('#modal').hidden=true}
+function modalT(n,i){
+  const t=i==null?{nome:'',horas:'',val:''}:trains(getNR(n))[i];
+  modal(`<h2>${i==null?'Novo treinamento':'Editar treinamento'}</h2>
+  <label>Nome<input id="mt-nome" class="inp" value="${esc(t.nome)}"></label>
+  <label>Carga horária (horas)<input id="mt-h" class="inp" type="number" min="0" step="0.5" value="${esc(t.horas)}"></label>
+  <label>Validade em meses (deixe vazio se não houver)<input id="mt-v" class="inp" type="number" min="0" value="${esc(t.val)}"></label>
+  <div class="btns"><button class="btn" data-a="mt-save" data-n="${n}" data-i="${i??''}">Salvar</button>
+  ${i!=null?`<button class="btn danger" data-a="mt-del" data-n="${n}" data-i="${i}">Excluir</button>`:''}
+  ${S.over[n]?`<button class="btn ghost" data-a="mt-reset" data-n="${n}">Restaurar padrão da NR</button>`:''}
+  <button class="btn ghost" data-a="modal-x">Cancelar</button></div>`);
+}
+
+/* ============ Ações ============ */
+function readEmit(){
+  const e=U.emit;if(!$('#e-nr'))return;
+  e.nr=+$('#e-nr').value;const ti=$('#e-ti');if(ti)e.ti=+ti.value;
+  e.tipo=$('#e-tipo').value;e.horas=$('#e-h').value;e.local=$('#e-loc').value;
+  e.ini=$('#e-ini').value;e.fim=$('#e-fim').value;
+  e.sel=[...document.querySelectorAll('[data-sel]:checked')].map(x=>x.dataset.sel);
+}
+const A={
+  tab(el){const t=el.dataset.t;if(t==='cursos'&&U.tab==='cursos')U.nr=null;if(U.tab==='emitir')readEmit();U.tab=t;render();scrollTo(0,0)},
+  abrir(el){U.tab='cursos';U.nr=+el.dataset.n;render();scrollTo(0,0)},
+  voltar(){U.nr=null;render();scrollTo(0,0)},
+  'emitir-de'(el){const n=+el.dataset.n,i=+el.dataset.i;const t=trains(getNR(n))[i];Object.assign(U.emit,{nr:n,ti:i,tipo:'inicial',horas:t&&t.horas?t.horas:'',ini:'',fim:'',sel:[]});U.tab='emitir';render();scrollTo(0,0)},
+  'edit-t'(el){modalT(+el.dataset.n,+el.dataset.i)},
+  'novo-t'(el){modalT(+el.dataset.n,null)},
+  'mt-save'(el){
+    const n=+el.dataset.n,i=el.dataset.i===''?null:+el.dataset.i;
+    const nome=$('#mt-nome').value.trim();if(!nome)return toast('Informe o nome do treinamento.');
+    const h=parseFloat($('#mt-h').value),v=parseInt($('#mt-v').value,10);
+    const list=trains(getNR(n)).map(x=>({...x}));const o={nome,horas:h>0?h:null,val:v>0?v:null};
+    if(i==null)list.push(o);else list[i]=o;
+    S.over[n]=list;P.perfil();closeModal();render();
+  },
+  'mt-del'(el){const n=+el.dataset.n,i=+el.dataset.i;const list=trains(getNR(n)).map(x=>({...x}));list.splice(i,1);S.over[n]=list;P.perfil();closeModal();render()},
+  'mt-reset'(el){delete S.over[+el.dataset.n];P.perfil();closeModal();render()},
+  'modal-x'(){closeModal()},
+  'au-mode'(el){const e=$('#au-email');if(e)U_AUTH.email=e.value.trim();U_AUTH.modo=el.dataset.m;showAuth()},
+  async 'au-go'(){
+    const a=U_AUTH;const s=$('#au-senha')?$('#au-senha').value:'';const eEl=$('#au-email');if(eEl)a.email=eEl.value.trim();
+    const base=location.href.split('#')[0].split('?')[0];
+    try{
+      if(a.recov){
+        if(s.length<8)return toast('Use pelo menos 8 caracteres na nova senha.');
+        const r=await sb.auth.updateUser({password:s});if(r.error)throw r.error;
+        a.recov=false;toast('Senha alterada.');await entrar();return;
+      }
+      if(!a.email)return toast('Informe o e-mail.');
+      if(a.modo==='esqueci'){
+        const r=await sb.auth.resetPasswordForEmail(a.email,{redirectTo:base});if(r.error)throw r.error;
+        toast('Se o e-mail tiver conta, o link de recuperação foi enviado.');a.modo='entrar';showAuth();return;
+      }
+      if(!s)return toast('Informe a senha.');
+      if(a.modo==='criar'){
+        if(s.length<8)return toast('Use pelo menos 8 caracteres na senha.');
+        const r=await sb.auth.signUp({email:a.email,password:s,options:{emailRedirectTo:base}});if(r.error)throw r.error;
+        if(r.data&&r.data.session){SESS=r.data.session;await entrar();return}
+        toast('Conta criada. Confirme o e-mail pelo link enviado e depois entre.');a.modo='entrar';showAuth();return;
+      }
+      const r=await sb.auth.signInWithPassword({email:a.email,password:s});if(r.error)throw r.error;
+      SESS=r.data.session;await entrar();
+    }catch(e){console.error(e);toast(msgAuth(e))}
+  },
+  async logout(){try{await sb.auth.signOut()}catch(e){}SESS=null;S=VAZIO();showAuth()},
+  retry(){entrar()},
+  async migrar(){
+    const o=dadosLocais();if(!o)return toast('Não há dados antigos neste navegador.');
+    await unir(o);toast('Dados deste navegador enviados para a sua conta.');
+  },
+  'a-save'(){
+    const nome=$('#a-nome').value.trim();if(!nome)return toast('Informe o nome do aluno.');
+    const d={nome,cpf:$('#a-cpf').value.trim(),funcao:$('#a-fun').value.trim(),empresa:$('#a-emp').value.trim()};
+    let obj;
+    if(U.editA){obj=S.alunos.find(x=>x.id===U.editA);Object.assign(obj,d);U.editA=null}else{obj={id:uid(),...d};S.alunos.push(obj)}
+    P.aluno(obj);render();toast('Aluno salvo.');
+  },
+  'a-edit'(el){U.editA=el.dataset.id;render();scrollTo(0,0)},
+  'a-cancel'(){U.editA=null;render()},
+  'a-del'(el){if(!confirm('Excluir este aluno? Os certificados já emitidos continuam salvos.'))return;S.alunos=S.alunos.filter(x=>x.id!==el.dataset.id);U.emit.sel=U.emit.sel.filter(x=>x!==el.dataset.id);P.alunoDel(el.dataset.id);render()},
+  'sel-todos'(){readEmit();const all=S.alunos.map(a=>a.id);U.emit.sel=U.emit.sel.length===all.length?[]:all;render()},
+  'emitir-go'(){
+    readEmit();const e=U.emit;const nr=getNR(e.nr),t=trains(nr)[e.ti];
+    if(!t)return toast('Escolha um treinamento. Se a NR não tem nenhum, cadastre em Cursos.');
+    if(!e.sel.length)return toast('Marque ao menos um aluno.');
+    const horas=parseFloat(e.horas);if(!(horas>0))return toast('Informe a carga horária.');
+    if(!e.ini||!e.fim)return toast('Informe as datas de início e término.');
+    if(e.fim<e.ini)return toast('A data de término é anterior ao início.');
+    const local=(e.local||S.cfg.local||'').trim();if(!local)return toast('Informe o local de realização.');
+    if(!S.cfg.inst.nome||!S.cfg.rt.nome){toast('Cadastre o instrutor e o responsável técnico em Ajustes.');return}
+    const val=t.val?addMonths(e.fim,t.val):'';
+    const novos=e.sel.map(id=>S.alunos.find(a=>a.id===id)).filter(Boolean).map(a=>({
+      id:uid(),codigo:'SST-'+Date.now().toString(36).toUpperCase().slice(-5)+Math.random().toString(36).slice(2,5).toUpperCase(),
+      aluno:a.nome,cpf:a.cpf,funcao:a.funcao,nr:nr.n,nrLabel:'NR-'+nr.n,nomeNR:nr.nome,trein:t.nome,tipo:e.tipo,horas,
+      ini:e.ini,fim:e.fim,local,validade:val,emissao:isoHoje(),aulas:nr.a.map(x=>x[0]),
+      emp:{nome:S.cfg.empresa,cnpj:S.cfg.cnpj,cidade:S.cfg.cidade},inst:{...S.cfg.inst},rt:{...S.cfg.rt}
+    }));
+    S.certs.unshift(...novos);P.certs(novos);openCerts(novos.map(c=>c.id));
+  },
+  filtro(el){U.cf=el.dataset.f;render()},
+  'c-ver'(el){openCerts([el.dataset.id])},
+  'c-del'(el){if(!confirm('Excluir este certificado?'))return;S.certs=S.certs.filter(c=>c.id!==el.dataset.id);P.certDel(el.dataset.id);render()},
+  print(){window.print()},
+  'cert-x'(){$('#cert-overlay').hidden=true;document.body.style.overflow='';if(U.tab==='emitir'){U.emit.sel=[];U.tab='certs'}render()},
+  'cfg-save'(){
+    const v=id=>$(id).value.trim();
+    Object.assign(S.cfg,{empresa:v('#c-emp'),cnpj:v('#c-cnpj'),cidade:v('#c-cid'),local:v('#c-loc')});
+    S.cfg.inst={nome:v('#c-in'),qual:v('#c-iq'),reg:v('#c-ir')};
+    S.cfg.rt={nome:v('#c-rn'),qual:v('#c-rq'),reg:v('#c-rr')};
+    P.perfil().then(ok=>{if(ok)toast('Ajustes salvos.')});
+  },
+  'logo-rm'(){S.cfg.logo='';P.perfil();render()},
+  async export(){
+    const txt=JSON.stringify(S);
+    try{
+      const dl=typeof claude!=='undefined'?await claude.use('downloads'):null;
+      if(dl){await dl.save({filename:'backup-treinamentos-sst.json',data:txt});return}
+      const b=new Blob([txt],{type:'application/json'});const a=document.createElement('a');
+      a.href=URL.createObjectURL(b);a.download='backup-treinamentos-sst.json';document.body.appendChild(a);a.click();a.remove();
+    }catch(x){if(!x||x.code!=='declined')toast('Não foi possível exportar o backup.')}
+  },
+  'import-btn'(){$('#import-file').click()},
+  async wipe(){
+    if(!confirm('Apagar todos os alunos, certificados e ajustes da sua conta? Esta ação não pode ser desfeita.'))return;
+    const id=meuId();
+    const ok=await dbRun(Promise.all([sb.from('alunos').delete().eq('user_id',id),sb.from('certificados').delete().eq('user_id',id),sb.from('perfis').delete().eq('user_id',id)]).then(rs=>{const e=rs.find(r=>r.error);return e||{}}));
+    if(ok){S=VAZIO();render();toast('Dados apagados.')}
+  }
+};
+document.addEventListener('click',e=>{
+  const el=e.target.closest('[data-a]');if(!el)return;
+  const f=A[el.dataset.a];if(f){e.preventDefault();f(el)}
+});
+document.addEventListener('change',e=>{
+  const t=e.target;
+  if(t.dataset.ch==='e-nr'){readEmit();U.emit.ti=0;const x=trains(getNR(U.emit.nr))[0];U.emit.horas=x&&x.horas?x.horas:'';render()}
+  else if(t.dataset.ch==='e-ti'){readEmit();const x=trains(getNR(U.emit.nr))[U.emit.ti];U.emit.horas=x&&x.horas?x.horas:'';render()}
+  else if(t.dataset.ch==='e-data'){readEmit();$('#e-val').textContent=valPrev()}
+  else if(t.id==='logo-file'&&t.files[0])lerLogo(t.files[0]);
+  else if(t.id==='import-file'&&t.files[0])importar(t.files[0]);
+});
+document.addEventListener('input',e=>{
+  const t=e.target;
+  if(t.id==='busca'){U.q=t.value;$('#lista').innerHTML=listaHTML()}
+  else if(t.id==='cbusca'){U.cq=t.value;$('#clista').innerHTML=certsLista()}
+  else if(t.id==='a-cpf')t.value=maskCPF(t.value);
+});
+function lerLogo(file){
+  const r=new FileReader();
+  r.onload=()=>{const img=new Image();img.onload=()=>{
+    const m=Math.min(1,500/img.width);const c=document.createElement('canvas');c.width=Math.round(img.width*m);c.height=Math.round(img.height*m);
+    c.getContext('2d').drawImage(img,0,0,c.width,c.height);S.cfg.logo=c.toDataURL('image/png');P.perfil();render();
+  };img.onerror=()=>toast('Não foi possível ler essa imagem.');img.src=r.result};
+  r.readAsDataURL(file);
+}
+function importar(file){
+  const r=new FileReader();
+  r.onload=()=>{try{const o=JSON.parse(r.result);if(!o||typeof o!=='object'||(!o.alunos&&!o.certs&&!o.cfg))throw 0;unir(o).then(()=>toast('Backup importado.'))}catch(x){toast('Arquivo de backup inválido.')}};
+  r.readAsText(file);
+}
+
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target&&e.target.id&&e.target.id.startsWith('au-')){e.preventDefault();A['au-go']()}});
+boot();
+</script>
+</body>
+</html>
